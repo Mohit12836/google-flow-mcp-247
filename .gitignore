@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.log
+flow-mcp-out/
+chrome-profile/
+user-data/
+.env
+.DS_Store
+Thumbs.db

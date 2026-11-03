@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  google-flow-mcp:
+    build: .
+    container_name: google-flow-mcp-247
+    restart: always
+    ports:
+      - "127.0.0.1:9333:9333" # CDP debugging port (bound to localhost for security)
+      - "3000:3000"           # MCP / Webhook server port
+    volumes:
+      # Persistent session storage: Keeps your Google login alive forever across server reboots
+      - ./chrome-profile:/app/chrome-profile
+      # Downloaded videos destination directory
+      - ./flow-mcp-out:/app/flow-mcp-out
+    environment:
+      - NODE_ENV=production
+      - CDP_PORT=9333
+      - DISPLAY=:99
+    shm_size: '2gb' # Prevents Chromium memory crashes on heavy video rendering
